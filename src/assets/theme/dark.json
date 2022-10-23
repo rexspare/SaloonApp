@@ -1,0 +1,12 @@
+{
+    "mode":"dark",
+    "backGround" :"#383838",
+    "body_Text":"#FFFFFF",
+    "subtle_Text":"#ECF1F4",
+    "primary_Brand":"#8C8CA1",
+    "secondary_Brand":"#D7C2A4",
+    "tertaiary_Brand":"#8D8C88",
+    "hyperlinks":"#4B4DED",
+    "valid_Accent":"#31D0AA",
+    "invalid_Accent":"#ED4B9E"
+}

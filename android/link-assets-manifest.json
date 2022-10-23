@@ -1,0 +1,37 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Merriweather-Bold.ttf",
+      "sha1": "09c7429408c624b9991c44e9975a9129fb2d2fe7"
+    },
+    {
+      "path": "src/assets/fonts/Merriweather-Regular.ttf",
+      "sha1": "f4e7810e4e20d1932d3d7994bb6f6456280ee6bd"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-Bold.ttf",
+      "sha1": "849aad65d5415cd8573439219aea4fd22ba299b3"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-ExtraBold.ttf",
+      "sha1": "6dfddec055293ef9dbaf477b8f50410cd8430412"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-Light.ttf",
+      "sha1": "87bb3162959e87b715dc03e1090bd23fbde06a54"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-Medium.ttf",
+      "sha1": "0516122e218e5d16d2c4090e5192235290ccf2bd"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-Regular.ttf",
+      "sha1": "b2fe9e6dbe05def653e8685c6b5c42a5dadf5c2e"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-SemiBold.ttf",
+      "sha1": "d7babb42a989729157533727d147a5d12a395d09"
+    }
+  ]
+}

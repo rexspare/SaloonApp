@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "802346306416",
+    "project_id": "nuyou-app",
+    "storage_bucket": "nuyou-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802346306416:android:08af18636efb04ac259db5",
+        "android_client_info": {
+          "package_name": "com.nuyouuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802346306416-pac8li1ae6lsr36rvquon4c1682bsqs3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoUbp0yxPoya_KaFnEQI_9pI-aO-GonHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802346306416-pac8li1ae6lsr36rvquon4c1682bsqs3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
