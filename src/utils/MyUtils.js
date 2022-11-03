@@ -1,5 +1,5 @@
 import React from "react"
-import { Platform } from "react-native";
+import { Platform, Linking } from "react-native";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { FONTS } from "./Common";
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
@@ -42,17 +42,17 @@ const SearchMap = () => {
 
 
 const handleLocationRequest = () => {
-    check(Platform === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+    check(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
         .then((result) => {
             if (result === RESULTS.GRANTED) {
                 getCurrentLocation()
             } else {
                 setisPermissionAllowed(false)
-                request(Platform === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
+                request(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
                     if (result === RESULTS.GRANTED) {
                         getCurrentLocation()
                     }
-                    check(Platform === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
+                    check(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
                         if (result === RESULTS.GRANTED) {
                             getCurrentLocation()
                         }
@@ -122,12 +122,28 @@ function tConvert (time) {
     }
     return time.join (''); // return adjusted time or original string
 }
-  
+
+const openMaps = (lat, lng, _label) => {
+    try {
+      const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+      const latLng = `${lat},${lng}`;
+      const label = _label;
+      const url = Platform.select({
+        ios: `${scheme}${label}@${latLng}`,
+        android: `${scheme}${latLng}(${label})`
+      });
+
+      Linking.openURL(url);
+    } catch (error) {
+      alert("Unable to open Maps")
+    }
+  }
 
 export {
     showFlash,
     getGeoCodePosition,
     getRatingText,
     categoryIntoArray,
-    tConvert
+    tConvert,
+    openMaps
 }

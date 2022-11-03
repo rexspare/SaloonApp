@@ -48,7 +48,7 @@ const ChangePassword = (props) => {
 
 
   return (
-    <SafeAreaView style={CommonStyles.container}>
+    <View style={CommonStyles.container}>
       <Layout fixed={false}>
         <View style={{ height: height - 60 }}>
           <CurveHeader />
@@ -104,7 +104,7 @@ const ChangePassword = (props) => {
 
         </View>
       </Layout>
-    </SafeAreaView>
+    </View>
   )
 }
 

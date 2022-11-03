@@ -71,8 +71,8 @@ const SignIn = (props) => {
   }
 
   return (
-    <SafeAreaView style={CommonStyles.container}>
-      <Layout fixed={false}>
+    <View style={CommonStyles.container}>
+      <Layout fixed={true}>
         <View style={{height : height - 60}}>
         <CurveHeader />
         <View style={{}}>
@@ -123,7 +123,7 @@ const SignIn = (props) => {
 
          </View>
       </Layout>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     paddingVertical :10,
     position:"absolute",
     width:width,
-    bottom:0
+    bottom:FS_height(3)
   }
  
  

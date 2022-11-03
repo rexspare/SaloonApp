@@ -37,7 +37,7 @@ export default function RootStack() {
 
   return (
     <NavigationContainer>
-      <StatusBar barStyle={"light-content"}
+      <StatusBar barStyle={Platform.OS === 'ios' ? "dark-content" : 'light-content'}
         backgroundColor={COLORS.secondary } />
          <Stack.Navigator screenOptions={{
         headerShown: false,
@@ -95,7 +95,7 @@ const TabStack = () => {
       headerShown: false,
       tabBarItemStyle: {},
 
-      tabBarStyle: { height: 55, display : visible ? "flex" : "none" },
+      tabBarStyle: { height: Platform.OS === 'ios' ? 85 : 55, display : visible ? "flex" : "none" },
       tabBarShowLabel:false
     }}
   >

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, Image } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, StatusBar } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Heading, If, Label, Layout } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
@@ -55,7 +55,7 @@ const Appointment = (props) => {
 
 
   return (
-    <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
+    <View style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
       {/* USER NOT LOGGED IN */}
       <If condition={!isUserLoggedIn}>
         <Layout fixed={true}>
@@ -94,7 +94,7 @@ const Appointment = (props) => {
         </If>
         {/* END */}
       </If>
-    </SafeAreaView>
+    </View>
   )
 }
 

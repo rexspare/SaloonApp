@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import CommonStyles from '../../assets/styles/CommonStyles'
 import { COLORS, FS_height, height, width } from '../../utils/Common'
@@ -24,10 +24,12 @@ const AuthScreen = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    GoogleSignin.configure({
-      webClientId: "1088713579994-l9damt0c9dpn89vvvv3cnjafdv6uccg9.apps.googleusercontent.com",
-      offlineAccess: true
-    });
+    if (Platform.OS === 'android') {
+      GoogleSignin.configure({
+        webClientId: "1088713579994-l9damt0c9dpn89vvvv3cnjafdv6uccg9.apps.googleusercontent.com",
+        offlineAccess: true
+      });
+    }
   }, [])
 
   const handlecontinue = async () => {
@@ -110,8 +112,8 @@ const AuthScreen = (props) => {
 
 
   return (
-    <SafeAreaView style={CommonStyles.container}>
-      <Layout fixed={false}>
+    <View style={CommonStyles.container}>
+      <Layout fixed={Platform.OS === 'ios' ? true : false}>
 
         <CurveHeader />
         <View style={{}}>
@@ -149,9 +151,11 @@ const AuthScreen = (props) => {
 
           {/*  ==============   Section 2   =================== */}
           <View style={[styles.sectionContainer, { paddingTop: 0 }]}>
-            <Social_Button type="facebook" />
-            <Social_Button type="google" style={{ marginVertical: 20 }}
-              onpress={() => GoogleSignUp()} />
+            <If condition={Platform.OS === 'android'}>
+              {/* <Social_Button type="facebook" /> */}
+              <Social_Button type="google" style={{ marginVertical: 20 }}
+                onpress={() => GoogleSignUp()} />
+            </If>
 
             <Label>{lang._4}</Label>
             <Text_type1 style={{ color: COLORS.subtle, marginVertical: 3 }}>{lang._5}</Text_type1>
@@ -164,7 +168,7 @@ const AuthScreen = (props) => {
         </View>
 
       </Layout>
-    </SafeAreaView>
+    </View>
   )
 }
 

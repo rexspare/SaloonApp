@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, Image, StatusBar, Animated, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, StatusBar, Animated, TouchableOpacity, FlatList, Platform } from 'react-native'
 import React, { useRef } from 'react'
 import { AppointmentItem, Heading, If, Label, Layout } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { styles } from './styles'
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler'
 import MTCIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { showFlash } from '../../utils/MyUtils'
+import { openMaps, showFlash } from '../../utils/MyUtils'
 import apiRequest from '../../Data/remote/Webhandler'
 import { ROUTES } from '../../Data/remote/Routes'
 
@@ -19,8 +19,9 @@ const Upcomming = (props) => {
 
     const handlePress = (detail) => {
         if (detail?.business_lat) {
-            props.navigation.navigate("PolyMap",
-                { service: detail, })
+            // props.navigation.navigate("PolyMap",
+            //     { service: detail, })
+            openMaps(detail?.business_lat, detail?.business_long, detail?.business_name )
         } else {
             showFlash("This Vendoe has Not added his Location", "none", 'none')
         }
@@ -57,8 +58,13 @@ const Upcomming = (props) => {
     };
 
     return (
-        <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
-            <StatusBar backgroundColor={COLORS.ServiceHeader} />
+        <View style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
+           {
+            Platform.OS === 'ios' ?
+            <View style={{width: width, height: 25, backgroundColor : COLORS.ServiceHeader}}/>
+            :
+            <StatusBar backgroundColor={COLORS.ServiceHeader} barStyle={"light-content"}/>
+           }
 
             <View style={styles.upcomingHeader}>
                 <Heading style={styles.upAppoints}>{lang._39}</Heading>
@@ -83,7 +89,7 @@ const Upcomming = (props) => {
                 }
             </Layout>
 
-        </SafeAreaView >
+        </View >
     )
 }
 

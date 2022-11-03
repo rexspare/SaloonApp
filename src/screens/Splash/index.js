@@ -22,19 +22,19 @@ const Splash = () => {
   const [isLoaded, setisLoaded] = useState(false)
 
   const handleLocationRequest = () => {
-    check(Platform === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+    check(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
       .then((result) => {
         if (result === RESULTS.GRANTED) {
           dispatch(setisLocationPermissionAllowed(true))
           getCurrentLocation()
         } else {
           dispatch(setisLocationPermissionAllowed(false))
-          request(Platform === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
+          request(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
             if (result === RESULTS.GRANTED) {
               dispatch(setisLocationPermissionAllowed(true))
               getCurrentLocation()
             }
-            check(Platform === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
+            check(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then((result) => {
               if (result === RESULTS.GRANTED) {
                 dispatch(setisLocationPermissionAllowed(true))
                 getCurrentLocation()

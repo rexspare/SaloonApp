@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -69,18 +69,18 @@ const Home = (props) => {
 
 
   return (
-    <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
+    <View style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
       <Layout fixed={false}>
 
         {/* HEADER SECTION */}
-        <View style={styles.sectiionHeader}>
+        <View style={[styles.sectiionHeader, {paddingTop :Platform.OS == 'ios' ? 25 : 0}]}>
           <View style={styles._circle}></View>
           <Heading style={styles._heading} >{user?.username?.length > 12 ?
             user?.username?.slice(0, 10) + "..." : user?.username
             || lang._25}</Heading>
           <Label style={styles._lable}>{lang._26}</Label>
           <Auth_Input
-            onfocus={() => props.navigation.navigate("SearchService")}
+            onMainPress={() => props.navigation.navigate("SearchService")}
             styles={styles._input}
             placeholder={lang._28}
             Icon={<Feather name="search" size={24} color={COLORS.subtle} />}
@@ -161,7 +161,7 @@ const Home = (props) => {
 
 
       </Layout>
-    </SafeAreaView>
+    </View>
   )
 }
 
