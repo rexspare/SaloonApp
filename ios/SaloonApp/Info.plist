@@ -36,49 +36,49 @@
 		</dict>
 	</dict>
 
-  <key>NSAppleMusicUsageDescription</key>
-  <string>YOUR TEXT</string>
   <key>NSBluetoothAlwaysUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires access to Bluetooth</string>
   <key>NSBluetoothPeripheralUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires access to Bluetooth devices</string>
   <key>NSCalendarsUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou would like to access your calender</string>
   <key>NSCameraUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires to access your photo library to show image on profile</string>
   <key>NSContactsUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires to access your contacts to share promotions</string>
   <key>NSFaceIDUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires access Face ID</string>
   <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Your Location is used to to show your nearby Salons</string>
   <key>NSLocationAlwaysUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Your Location is used to to show your nearby Salons</string>
   <key>NSLocationTemporaryUsageDescriptionDictionary</key>
   <dict>
-    <key>YOUR-PURPOSE-KEY</key>
-    <string>YOUR TEXT</string>
+    <key>Personalization</key>
+    <string>Your Location is used to to show your nearby Salons</string>
   </dict>
   <key>NSLocationWhenInUseUsageDescription</key>
-  <string>YOUR TEXT</string>
-  <key>NSMicrophoneUsageDescription</key>
-  <string>YOUR TEXT</string>
-  <key>NSMotionUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Your Location is used to to show your nearby Salons</string>
   <key>NSPhotoLibraryUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires to access your photo library to show image on profile</string>
   <key>NSPhotoLibraryAddUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires to access your photo library to show image on profile</string>
   <key>NSRemindersUsageDescription</key>
-  <string>YOUR TEXT</string>
-  <key>NSSpeechRecognitionUsageDescription</key>
-  <string>YOUR TEXT</string>
-  <key>NSSiriUsageDescription</key>
-  <string>YOUR TEXT</string>
+  <string>Nuyou requires access Reminders</string>
   <key>NSUserTrackingUsageDescription</key>
-  <string>YOUR TEXT</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+  <string>Nuyou requires access usage tracking</string>
+  <key>NSMicrophoneUsageDescription</key>
+  	<string>Nuyou requires microphone access</string>
+	<key>NSAppleMusicUsageDescription</key>
+  	<string>Nuyou requires Apple Music access</string>
+	<key>NSMotionUsageDescription</key>
+  	<string>Nuyou requires access your motion use</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+ 	 <string>Nuyou requires access recognize speech</string>
+  	<key>NSSiriUsageDescription</key>
+  	<string>Nuyou requires Siri access</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+ 	 <string>Nuyou requires Bluetooth access</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Merriweather-Bold.ttf</string>
