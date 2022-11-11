@@ -11,7 +11,7 @@ const App = () => {
 
 
   // OneSignal Initialization
-  OneSignal.setAppId("53437734-79b9-4cab-b779-e2e9b9abb66c");
+  OneSignal.setAppId("f65cce54-654b-43d2-b664-bd55c5e92cd8");
 
   // promptForPushNotificationsWithUserResponse will show the native iOS or Android notification permission prompt.
   // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
