@@ -11,6 +11,11 @@ target 'SaloonApp' do
 
   permissions_path = '../node_modules/react-native-permissions/ios'
 
+  pod 'Firebase', :modular_headers => true
+  pod 'FirebaseCoreInternal', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+
   pod 'Permission-AppTrackingTransparency', :path => "#{permissions_path}/AppTrackingTransparency"
   pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral"
   pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars"
@@ -54,4 +59,9 @@ target 'SaloonApp' do
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
+end
+
+
+target 'OneSignalNotificationServiceExtension' do
+  pod 'OneSignalXCFramework', '>= 3.0', '< 4.0'
 end
