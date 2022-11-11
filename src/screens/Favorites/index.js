@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, Image } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, Platform } from 'react-native'
 import React from 'react'
 import { Heading, If, Label, Layout } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
@@ -17,8 +17,14 @@ const Favorites = (props) => {
 
 
   return (
-    <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
+    <View style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
       {/* NO FAVORITES ADDED */}
+      {
+        Platform.OS === 'ios' ?
+          <View style={{ width: width, height: 25, backgroundColor: COLORS.ServiceHeader }} />
+          :
+          <StatusBar backgroundColor={COLORS.ServiceHeader} barStyle={"light-content"} />
+      }
       <If condition={DATA.length == 0}>
         <Layout fixed={true}>
           <Heading style={styles.noAppoints}>{lang._87}</Heading>
@@ -44,7 +50,7 @@ const Favorites = (props) => {
           />
         </Layout>
       </If>
-    </SafeAreaView>
+    </View>
   )
 }
 

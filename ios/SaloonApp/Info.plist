@@ -35,50 +35,47 @@
 			</dict>
 		</dict>
 	</dict>
-
-  <key>NSBluetoothAlwaysUsageDescription</key>
-  <string>Nuyou requires access to Bluetooth</string>
-  <key>NSBluetoothPeripheralUsageDescription</key>
-  <string>Nuyou requires access to Bluetooth devices</string>
-  <key>NSCalendarsUsageDescription</key>
-  <string>Nuyou would like to access your calender</string>
-  <key>NSCameraUsageDescription</key>
-  <string>Nuyou requires to access your photo library to show image on profile</string>
-  <key>NSContactsUsageDescription</key>
-  <string>Nuyou requires to access your contacts to share promotions</string>
-  <key>NSFaceIDUsageDescription</key>
-  <string>Nuyou requires access Face ID</string>
-  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-  <string>Your Location is used to to show your nearby Salons</string>
-  <key>NSLocationAlwaysUsageDescription</key>
-  <string>Your Location is used to to show your nearby Salons</string>
-  <key>NSLocationTemporaryUsageDescriptionDictionary</key>
-  <dict>
-    <key>Personalization</key>
-    <string>Your Location is used to to show your nearby Salons</string>
-  </dict>
-  <key>NSLocationWhenInUseUsageDescription</key>
-  <string>Your Location is used to to show your nearby Salons</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>Nuyou requires to access your photo library to show image on profile</string>
-  <key>NSPhotoLibraryAddUsageDescription</key>
-  <string>Nuyou requires to access your photo library to show image on profile</string>
-  <key>NSRemindersUsageDescription</key>
-  <string>Nuyou requires access Reminders</string>
-  <key>NSUserTrackingUsageDescription</key>
-  <string>Nuyou requires access usage tracking</string>
-  <key>NSMicrophoneUsageDescription</key>
-  	<string>Nuyou requires microphone access</string>
 	<key>NSAppleMusicUsageDescription</key>
-  	<string>Nuyou requires Apple Music access</string>
-	<key>NSMotionUsageDescription</key>
-  	<string>Nuyou requires access your motion use</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
- 	 <string>Nuyou requires access recognize speech</string>
-  	<key>NSSiriUsageDescription</key>
-  	<string>Nuyou requires Siri access</string>
+	<string>Nuyou requires Apple Music access</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
- 	 <string>Nuyou requires Bluetooth access</string>
+	<string>Nuyou requires Bluetooth access</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Nuyou requires access to Bluetooth devices</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Nuyou would like to access your calender</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Nuyou requires to access your photo library to show image on profile</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Nuyou requires to access your contacts to share promotions</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Nuyou requires access Face ID</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your Location is used to to show your nearby Salons</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your Location is used to to show your nearby Salons</string>
+	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+	<dict>
+		<key>Personalization</key>
+		<string>Your Location is used to to show your nearby Salons</string>
+	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your Location is used to to show your nearby Salons</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Nuyou requires microphone access</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Nuyou requires access your motion use</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Nuyou requires to access your photo library to show image on profile</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Nuyou requires to access your photo library to show image on profile</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Nuyou requires access Reminders</string>
+	<key>NSSiriUsageDescription</key>
+	<string>Nuyou requires Siri access</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Nuyou requires access recognize speech</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Nuyou requires access usage tracking</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Merriweather-Bold.ttf</string>
@@ -115,8 +112,12 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

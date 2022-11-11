@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, Animated, TouchableOpacity } from 'react-native'
+import { View, StatusBar, Animated, TouchableOpacity, Platform } from 'react-native'
 import React, { useRef, useState, useEffect } from 'react'
 import { AppHeader, FavoriteItem, Layout } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
@@ -73,8 +73,12 @@ const Favorite_Services = (props) => {
     };
 
     return (
-        <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
-            <StatusBar backgroundColor={COLORS.ServiceHeader} />
+        <View style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
+            {
+                Platform.OS === 'ios' &&
+                <View style={{ width: width, height: 25, backgroundColor: COLORS.ServiceHeader }} />
+            }
+            <StatusBar backgroundColor={COLORS.ServiceHeader} barStyle={"light-content"} />
 
             <AppHeader
                 title={lang._91}
@@ -101,7 +105,7 @@ const Favorite_Services = (props) => {
                 </GestureHandlerRootView>
             </Layout>
 
-        </SafeAreaView >
+        </View >
     )
 }
 
