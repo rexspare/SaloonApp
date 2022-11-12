@@ -20,7 +20,9 @@ UPDATE_BOOKING_STATUS:"update-booking-status",
 GET_BOOKING_SLOTS :"get-booking-slot",
 ADD_REVIEW :"add-reviews",
 GET_REVIEWS:"get-reviews",
-UPDATE_USER_PROFILE :"update-user-profile"
+UPDATE_USER_PROFILE :"update-user-profile",
+SEND_USER_NOTIFICATION : "send-user-notification",
+SEND_PROVIDER_NOTIFICATION:'send-provider-notification'
 }
 
 export {

@@ -25,10 +25,27 @@ const BookService = (props) => {
         const exists = allVendors.find((x) => x?.id == activeService?.user_id)
         if (exists) {
             setVendor(exists)
+            alert(JSON.stringify(exists))
         } else {
             setVendor({})
         }
+        // getVendor()
     }, [activeService?.service_id])
+
+    const getVendor = async () =>{
+        // const result = await apiRequest({
+        //     method: "post",
+        //     url: ROUTES.GET_USERS,
+        //     data: {id :  activeService?.user_id}
+        //   }).catch((err) => { 
+        //     showFlash("Somehomg Went Wrong", "danger", 'auto')
+        //     setisLoading(false)
+        //   });
+
+        //   if(result.data.status){
+        //     alert(JSON.stringify(result.data))
+        //   }
+    }
 
     useEffect(() => {
         if (Vendor?.business_lat && Vendor?.business_long) {

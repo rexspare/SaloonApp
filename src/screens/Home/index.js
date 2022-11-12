@@ -62,8 +62,8 @@ const Home = (props) => {
       x.businessDetails?.primary_category?.includes(cat.category_name) || x.businessDetails?.secondary_category?.includes(cat.category_name))
     props.navigation.navigate("Vendors",
       {
-        vendors : vendersByCategory,
-        title : cat.category_name
+        vendors: vendersByCategory,
+        title: cat.category_name
       })
   }
 
@@ -73,18 +73,24 @@ const Home = (props) => {
       <Layout fixed={false}>
 
         {/* HEADER SECTION */}
-        <View style={[styles.sectiionHeader, {paddingTop :Platform.OS == 'ios' ? 25 : 0}]}>
+        <View style={[styles.sectiionHeader, { paddingTop: Platform.OS == 'ios' ? 25 : 0 }]}>
           <View style={styles._circle}></View>
           <Heading style={styles._heading} >{user?.username?.length > 12 ?
             user?.username?.slice(0, 10) + "..." : user?.username
             || lang._25}</Heading>
           <Label style={styles._lable}>{lang._26}</Label>
-          <Auth_Input
-            onMainPress={() => props.navigation.navigate("SearchService")}
-            styles={styles._input}
-            placeholder={lang._28}
-            Icon={<Feather name="search" size={24} color={COLORS.subtle} />}
-          />
+          <TouchableOpacity 
+          style={{width:'100%'}} 
+          activeOpacity={0.8}
+          onPress={() => props.navigation.navigate("SearchService")}>
+            <Auth_Input
+              onMainPress={() => props.navigation.navigate("SearchService")}
+              styles={styles._input}
+              placeholder={lang._28}
+              Icon={<Feather name="search" size={24} color={COLORS.subtle} />}
+              editable={false}
+            />
+          </TouchableOpacity>
         </View>
         {/* End */}
 

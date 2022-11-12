@@ -14,6 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useDispatch } from 'react-redux'
 import { registerUser, setUser, setIsUserLoggedIn } from '../../Data/Local/Store/Actions/AuthActions'
 import { storage_keys } from '../../utils/StorageKeys'
+import OneSignal from 'react-native-onesignal';
 
 const AuthScreen = (props) => {
   const [email, setemail] = useState('')
@@ -60,6 +61,7 @@ const AuthScreen = (props) => {
   const GoogleSignUp = async () => {
     setisLoading(true)
     try {
+      const onesignalData = await OneSignal.getDeviceState();
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signIn().then(async (result) => {
         const response = await dispatch(
@@ -67,7 +69,8 @@ const AuthScreen = (props) => {
             email: result.user?.email,
             username: result.user?.name,
             role: 'customer',
-            googleID: result.user?.id
+            googleID: result.user?.id,
+            player_id: onesignalData?.userId
           },
             (result) => { })
         );
