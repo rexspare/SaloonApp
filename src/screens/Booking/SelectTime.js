@@ -105,7 +105,7 @@ const SelectTime = (props) => {
                         url: ROUTES.SEND_PROVIDER_NOTIFICATION,
                         data: {
                             player_id : Vendor?.player_id,
-                            message : `You have a new booking for ${activeService?.service_id} by ${user?.username}`
+                            message : `You have a new booking for service id:${activeService?.service_id} by ${user?.username}`
                         }
                     }).catch((err) => {
                     });
