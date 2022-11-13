@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, Image } from 'react-native'
+import { SafeAreaView, StyleSheet, Linking,Platform } from 'react-native'
 import React, { useState } from 'react'
 import { GoBackHeader, Heading, Layout, MenuItem } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
@@ -21,7 +21,16 @@ const Setting = (props) => {
         {
             id: 3,
             title: "For Partners",
-            callBack: () => { }
+            callBack: () => {
+                if (Platform.OS === 'ios') {
+                  const link = 'itms-apps://apps.apple.com/tr/app/times-tables-lets-learn/id1055437768?l=tr';
+                  Linking.canOpenURL(link).then(supported => {
+                    supported && Linking.openURL(link);
+                  }, (err) => console.log(err));
+                } else {
+                  Linking.openURL("http://play.google.com/store/apps/details?id=com.saloonappprovider")
+                }
+              }
         },
         {
             id: 4,
