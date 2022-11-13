@@ -76,6 +76,10 @@
 	<string>Nuyou requires access recognize speech</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Nuyou requires access usage tracking</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+    	<string>itms-apps</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Merriweather-Bold.ttf</string>
