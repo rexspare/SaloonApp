@@ -13,13 +13,32 @@ import { getAllServices, getCategories, setIsUserLoggedIn, setLocation, setUser,
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Geolocation from 'react-native-geolocation-service';
 import { showFlash } from '../../utils/MyUtils';
+import OneSignal from 'react-native-onesignal';
 
 const prefManager = new PrefManager()
 
 const Splash = () => {
   const dispatch = useDispatch()
   const isLocationPermissionAllowed = useSelector((state) => state.authReducer.isLocationPermissionAllowed)
+  const user = useSelector((state) => state.authReducer.user)
   const [isLoaded, setisLoaded] = useState(false)
+
+    //Method for handling notifications received while app in foreground
+    OneSignal.setNotificationWillShowInForegroundHandler(notificationReceivedEvent => {
+      console.log("OneSignal: notification will show in foreground:", notificationReceivedEvent);
+      let notification = notificationReceivedEvent.getNotification();
+      if(user?.id){
+        dispatch(getBookings(user?.id))
+      }
+      const data = notification.additionalData
+      // Complete with null means don't show a notification.
+      notificationReceivedEvent.complete(notification);
+    });
+  
+    //Method for handling notifications opened
+    OneSignal.setNotificationOpenedHandler(notification => {
+      console.log("OneSignal: notification opened:", notification);
+    });
 
   const handleLocationRequest = () => {
     check(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)

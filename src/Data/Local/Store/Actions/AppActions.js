@@ -138,4 +138,9 @@ export const setActiveService = (data) => async (dispatch) => {
     dispatch({ type: Types.ACTIVE_SERVICE, payload: data });
 };
 
+export const setActiveVendor = (data) => async (dispatch) => {
+    dispatch({ type: Types.ACTIVE_VENDOR, payload: data });
+};
+
+
 

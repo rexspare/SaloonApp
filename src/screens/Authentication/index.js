@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux'
 import { registerUser, setUser, setIsUserLoggedIn } from '../../Data/Local/Store/Actions/AuthActions'
 import { storage_keys } from '../../utils/StorageKeys'
 import OneSignal from 'react-native-onesignal';
+import { showFlash } from '../../utils/MyUtils'
 
 const AuthScreen = (props) => {
   const [email, setemail] = useState('')
@@ -75,7 +76,12 @@ const AuthScreen = (props) => {
             (result) => { })
         );
         if (response.authenticity === true) {
-          callBack(response)
+          if (response?.userData?.role != "vendor") {
+            callBack(response)
+          } else {
+            showFlash("Vendors cannot loggin in user app!", "danger", 'none')
+          }
+
         }
       });
     } catch (error) {

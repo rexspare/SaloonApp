@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, StatusBar } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import commonStyles from '../../assets/styles/CommonStyles'
 import { Auth_Button, Text_Button } from '../../components/Buttons'
 import { Layout, ServiceHeader, Heading, Label, KeyValue } from '../../components'
@@ -10,6 +10,7 @@ import { lang } from '../../assets/languages'
 import { getGeoCodePosition, showFlash } from '../../utils/MyUtils'
 import apiRequest from '../../Data/remote/Webhandler'
 import { ROUTES } from '../../Data/remote/Routes'
+import { setActiveVendor } from '../../Data/Local/Store/Actions'
 
 const BookService = (props) => {
     const activeService = useSelector((state) => state.appReducer.activeService)
@@ -19,13 +20,13 @@ const BookService = (props) => {
     const [isLoading, setisLoading] = useState(false)
     const [Vendor, setVendor] = useState({})
     const [formattedAddrees, setformattedAddrees] = useState('')
-
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const exists = allVendors.find((x) => x?.id == activeService?.user_id)
         if (exists) {
             setVendor(exists)
-            alert(JSON.stringify(exists))
+            dispatch(setActiveVendor(exists))
         } else {
             setVendor({})
         }

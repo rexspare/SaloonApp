@@ -28,7 +28,7 @@ const SignIn = (props) => {
         if (password != "") {
           const result = await apiRequest({
             method: "post",
-            url: ROUTES.SEND_PROVIDER_NOTIFICATION,
+            url: ROUTES.LOGIN,
             data: {email :route.params.email, password, role : "customer",player_id : data?.userId }
           }).catch((err) => { 
             showFlash("Somehomg Went Wrong", "danger", 'auto')
@@ -42,7 +42,7 @@ const SignIn = (props) => {
             dispatch(setIsUserLoggedIn(true))
             AsyncStorage.removeItem("@Email")
           } else {
-            showFlash(result.data.message, 'danger', 'none')
+            showFlash("Wrong credentials", 'danger', 'none')
 
           }
         } else {

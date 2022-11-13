@@ -98,15 +98,18 @@ const SelectTime = (props) => {
         });
         console.log(result.data);
         if (result.data?.status) {
-            const notificationResponse = await apiRequest({
-                method: "post",
-                url: ROUTES.SEND_PROVIDER_NOTIFICATION,
-                data: {
-                    player_id : "PLAYER ID",
-                    message : `You have a new booking for ${activeService?.service_id} by ${user?.username}`
+                // SEND NOTIFICATION IF PLAYERIS EXISTS
+                if(Vendor?.player_id){
+                    const notificationResponse = await apiRequest({
+                        method: "post",
+                        url: ROUTES.SEND_PROVIDER_NOTIFICATION,
+                        data: {
+                            player_id : Vendor?.player_id,
+                            message : `You have a new booking for ${activeService?.service_id} by ${user?.username}`
+                        }
+                    }).catch((err) => {
+                    });
                 }
-            }).catch((err) => {
-            });
             showFlash("Service Booked Successfully", "success", 'none')
             dispatch(getFavorites(user.id))
             dispatch(getBookings(user.id))

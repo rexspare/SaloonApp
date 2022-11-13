@@ -9,7 +9,8 @@ var defaultState = {
   allVendors: [],
   isGettingNearby: false,
   favorites:[],
-  myBookings:[]
+  myBookings:[],
+  activeVendor :{}
 };
 
 
@@ -61,6 +62,12 @@ var appReducer = (state = defaultState, action) => {
     case Types.MY_BOOKINGS: {
       let newState = Object.assign({}, state);
       newState.myBookings = action.payload;
+      return newState;
+    }
+
+    case Types.ACTIVE_VENDOR: {
+      let newState = Object.assign({}, state);
+      newState.activeVendor = action.payload;
       return newState;
     }
 
