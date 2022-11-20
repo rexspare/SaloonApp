@@ -674,6 +674,7 @@
 				DEVELOPMENT_TEAM = AC3LH49PGW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SaloonApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -706,6 +707,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AC3LH49PGW;
 				INFOPLIST_FILE = SaloonApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

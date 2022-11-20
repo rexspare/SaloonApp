@@ -22,7 +22,8 @@ ADD_REVIEW :"add-reviews",
 GET_REVIEWS:"get-reviews",
 UPDATE_USER_PROFILE :"update-user-profile",
 SEND_USER_NOTIFICATION : "send-user-notification",
-SEND_PROVIDER_NOTIFICATION:'send-provider-notification'
+SEND_PROVIDER_NOTIFICATION:'send-provider-notification',
+USER_IS_NOTIFY : 'user-is-notify'
 }
 
 export {

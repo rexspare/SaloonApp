@@ -71,7 +71,8 @@ const AuthScreen = (props) => {
             username: result.user?.name,
             role: 'customer',
             googleID: result.user?.id,
-            player_id: onesignalData?.userId
+            player_id: onesignalData?.userId,
+            user_image_url : result?.user?.photo || ""
           },
             (result) => { })
         );

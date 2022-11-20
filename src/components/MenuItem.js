@@ -10,7 +10,7 @@ const MenuItem = (props) => {
     const { Icon, title, onpress } = props
     return (
         <TouchableOpacity style={[styles.container, { backgroundColor: COLORS.primary }]}
-            onPress={() => onpress()}>
+            onPress={() => onpress()} activeOpacity={0.8}>
             <If condition={Icon}>
                 {Icon}
             </If>

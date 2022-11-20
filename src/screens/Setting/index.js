@@ -1,17 +1,22 @@
 import { SafeAreaView, StyleSheet, Linking,Platform } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import { GoBackHeader, Heading, Layout, MenuItem } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
 import { COLORS, FS_height, height, width } from '../../utils/Common'
 import ToggleSwitch from 'toggle-switch-react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useSelector } from 'react-redux'
+import apiRequest from '../../Data/remote/Webhandler'
+import { ROUTES } from '../../Data/remote/Routes'
 
 const Setting = (props) => {
+    const user = useSelector((state) => state.authReducer.user)
+    const {navigation} = props
     const Menu = [
         {
             id: 1,
             title: "Notification Settings",
-            callBack: () => setisOn(!isOn)
+            callBack: () => {}
         },
         {
             id: 2,
@@ -51,6 +56,44 @@ const Setting = (props) => {
 
     const [isOn, setisOn] = useState(false)
 
+    useEffect(() => {
+      const unsubscribe = navigation.addListener("focus", () => {
+        getNotificationSetting()
+      })
+      return unsubscribe
+    }, [navigation])
+    
+
+    const getNotificationSetting = async () => {
+        const result = await apiRequest({
+            method: "POST",
+            url: ROUTES.USER_IS_NOTIFY,
+            data : {user_id : user.id, is_notify : "check"}
+        }).catch((error) => {
+            console.log("Error Getting Reviews ==>>", error);
+        })
+
+        if (result?.data?.status) {
+            setisOn(result?.data?.is_notify == 1 ? true : false)
+        }
+    }
+
+    const updateNotificationSetting = async (val) => {
+        const result = await apiRequest({
+            method: "POST",
+            url: ROUTES.USER_IS_NOTIFY,
+            data : {user_id : user.id, is_notify : val ? 1 : 0}
+        }).catch((error) => {
+            console.log("Error Getting Reviews ==>>", error);
+        })
+      
+        if (result.data?.status) {
+            setisOn(result?.data?.is_notify == 1 ? true : false)
+        }
+    }
+
+
+
     return (
         <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
             <GoBackHeader onpress={() => props.navigation.goBack()} />
@@ -70,7 +113,7 @@ const Setting = (props) => {
                                     onColor="green"
                                     offColor="red"
                                     size="medium"
-                                    onToggle={() => setisOn(!isOn)}
+                                    onToggle={(val) => {updateNotificationSetting(val); setisOn(val)}}
                                 /> 
                                 :
                                 <AntDesign name='right' size={FS_height(3.3)} color={COLORS.secondary} />
