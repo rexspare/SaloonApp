@@ -112,12 +112,12 @@ const AuthScreen = (props) => {
 
 
   useEffect(() => {
-    AsyncStorage.getItem("@Email")
-      .then((email) => {
-        if (email) {
-          navigation.navigate("Verify", { email: email })
-        }
-      })
+    // AsyncStorage.getItem("@Email")
+    //   .then((email) => {
+    //     if (email) {
+    //       navigation.navigate("Verify", { email: email })
+    //     }
+    //   })
   }, [])
 
 

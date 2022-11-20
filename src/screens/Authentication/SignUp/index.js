@@ -52,8 +52,9 @@ const SignUp = (props) => {
   }
 
   const callBack = () => {
-    navigation.navigate("Verify", { email: route.params.email })
-    AsyncStorage.setItem("@Email", route.params.email)
+    showFlash("Success! you can now sign in to Nuyou!", 'success', 'none')
+    props.navigation.navigate("SignIn", { email : route.params.email})
+    // AsyncStorage.setItem("@Email", route.params.email)
   }
 
   return (
