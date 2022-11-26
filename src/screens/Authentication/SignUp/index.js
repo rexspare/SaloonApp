@@ -53,7 +53,7 @@ const SignUp = (props) => {
 
   const callBack = () => {
     showFlash("Success! you can now sign in to Nuyou!", 'success', 'none')
-    props.navigation.navigate("SignIn", { email : route.params.email})
+    props.navigation.replace("SignIn", { email : route.params.email})
     // AsyncStorage.setItem("@Email", route.params.email)
   }
 
@@ -106,7 +106,7 @@ const SignUp = (props) => {
               <Label style={styles.labelStyles}>{lang._17}</Label>
               <Phone_Input
                 onChange={setphone}
-
+                placeholder={"phone #"}
               />
 
             </View>

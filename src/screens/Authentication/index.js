@@ -76,6 +76,7 @@ const AuthScreen = (props) => {
           },
             (result) => { })
         );
+        alert(JSON.stringify(response.userData))
         if (response.authenticity === true) {
           if (response?.userData?.role != "vendor") {
             callBack(response)

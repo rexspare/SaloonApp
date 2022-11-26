@@ -17,6 +17,7 @@ const Appointment = (props) => {
   const bookingList = useSelector((state) => state.appReducer.myBookings)
   const user = useSelector((state) => state.authReducer.user)
   const [sortedList, setsortedList] = useState([])
+  const [refreshState, setrefreshState] = useState(1)
   const dispatch = useDispatch()
 
   const findSalonNearby = () => {
@@ -35,7 +36,9 @@ const Appointment = (props) => {
   }
 
   const getBookingHistory = () => {
-    dispatch(getBookings(user?.id))
+    setrefreshState((prev) => prev + 1)
+    dispatch(getBookings(user?.id));
+  
   }
 
   useEffect(() => {
@@ -50,7 +53,7 @@ const Appointment = (props) => {
         ? 1 : (a.booking_status === b.booking_status ? 0 : -1))
     })
     setsortedList(sorted)
-  }, [bookingList?.length])
+  }, [bookingList?.length, refreshState])
 
 
 

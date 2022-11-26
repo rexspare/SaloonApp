@@ -31,6 +31,9 @@ const BookService = (props) => {
             setVendor({})
         }
         // getVendor()
+        console.log('====================================');
+        console.log(activeService);
+        console.log('====================================');
     }, [activeService?.service_id])
 
     const getVendor = async () =>{

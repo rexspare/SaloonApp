@@ -76,6 +76,8 @@ const SelectTime = (props) => {
             time = moment(fromTime.getTime() + mServiceTime * 60 * 60 * 1000).format('HH:mm:ss')
         } else if (activeService.service_time.toUpperCase().includes("M")) {
             time = moment(fromTime.getTime() + mServiceTime * 60 * 1000).format('HH:mm:ss')
+        } else {
+            time = moment(fromTime.getTime() + mServiceTime * 60 * 1000).format('HH:mm:ss')
         }
         return time
     }

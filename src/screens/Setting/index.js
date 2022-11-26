@@ -23,20 +23,20 @@ const Setting = (props) => {
             title: "Change Password",
             callBack: () => props.navigation.navigate("ChangePassword")
         },
-        {
-            id: 3,
-            title: "For Partners",
-            callBack: () => {
-                if (Platform.OS === 'ios') {
-                  const link = 'itms-apps://apps.apple.com/tr/app/times-tables-lets-learn/id1055437768?l=tr';
-                  Linking.canOpenURL(link).then(supported => {
-                    supported && Linking.openURL(link);
-                  }, (err) => console.log(err));
-                } else {
-                  Linking.openURL("http://play.google.com/store/apps/details?id=com.saloonappprovider")
-                }
-              }
-        },
+        // {
+        //     id: 3,
+        //     title: "For Partners",
+        //     callBack: () => {
+        //         if (Platform.OS === 'ios') {
+        //           const link = 'itms-apps://apps.apple.com/tr/app/times-tables-lets-learn/id1055437768?l=tr';
+        //           Linking.canOpenURL(link).then(supported => {
+        //             supported && Linking.openURL(link);
+        //           }, (err) => console.log(err));
+        //         } else {
+        //           Linking.openURL("http://play.google.com/store/apps/details?id=com.saloonappprovider")
+        //         }
+        //       }
+        // },
         {
             id: 4,
             title: "Privacy Policy",
