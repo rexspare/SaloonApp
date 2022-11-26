@@ -12,6 +12,9 @@ import { ROUTES } from '../../Data/remote/Routes'
 import apiRequest from '../../Data/remote/Webhandler'
 import { showFlash } from '../../utils/MyUtils'
 import { setUser } from '../../Data/Local/Store/Actions'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { storage_keys } from '../../utils/StorageKeys'
+
 
 const ViewProfile = (props) => {
     const user = useSelector((state) => state.authReducer.user)
@@ -42,7 +45,10 @@ const ViewProfile = (props) => {
                 if (result?.data?.status) {
                     showFlash(result?.data?.message, 'success', 'none')
                     dispatch(setUser({...user, email : email, username : username, phone : phone}))
-                    setisEdit(false)
+                    AsyncStorage.setItem(storage_keys.USER_DATA_KEY, 
+                        JSON.stringify({...user, email : email, username : username, phone : phone}))
+                        .then(() => {  setisEdit(false)})
+                  
                 } else {
                     showFlash(result?.data?.message, 'danger', 'none')
                 }

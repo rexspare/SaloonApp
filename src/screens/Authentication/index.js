@@ -62,6 +62,7 @@ const AuthScreen = (props) => {
   const GoogleSignUp = async () => {
     setisLoading(true)
     try {
+      await GoogleSignin.revokeAccess()
       const onesignalData = await OneSignal.getDeviceState();
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signIn().then(async (result) => {
@@ -76,12 +77,11 @@ const AuthScreen = (props) => {
           },
             (result) => { })
         );
-        alert(JSON.stringify(response.userData))
         if (response.authenticity === true) {
           if (response?.userData?.role != "vendor") {
             callBack(response)
           } else {
-            showFlash("Vendors cannot loggin in user app!", "danger", 'none')
+            showFlash("Vendor cannot loggin in user app!", "danger", 'none')
           }
 
         }
