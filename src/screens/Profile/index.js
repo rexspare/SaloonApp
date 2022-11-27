@@ -1,5 +1,5 @@
 import { View, Linking, SafeAreaView, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Heading, Layout, MenuItem } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
 import { COLORS, FS_height, height, width } from '../../utils/Common'
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setIsUserLoggedIn, setUser } from '../../Data/Local/Store/Actions'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storage_keys } from '../../utils/StorageKeys'
-import { useEffect } from 'react'
+import { BASE_URL} from '../../Data/remote/Routes'
 
 
 const Profile = (props) => {
@@ -76,13 +76,20 @@ const Menu = [
   console.log(user.username);
   },[])
 
+  let avatar = user?.user_image ?
+        user?.user_image?.includes('http') ?
+            user?.user_image :
+            BASE_URL + "uploads/" + user?.user_image
+        :
+        "https://www.w3schools.com/w3images/avatar2.png"
+
   return (
     <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
       <Layout fixed={false}>
         {/* Header */}
         <View style={styles.topContainer}>
           <View style={styles.imageContainer}>
-            <Image source={{ uri: "https://picsum.photos/200/300" }}
+            <Image source={{ uri: avatar }}
               style={styles.image} />
           </View>
           <Heading style={{ fontSize: FS_height(3.5), marginTop: '3%' }}>{user.username}</Heading>

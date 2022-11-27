@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, TouchableOpacity, Alert, RefreshControl } from 'react-native'
 import React, { useState } from 'react'
 import { GoBackHeader, Heading, If, Label, Layout, MenuItem, Text_type1 } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
@@ -8,13 +8,13 @@ import MTCIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { lang } from '../../assets/languages'
 import { useDispatch, useSelector } from 'react-redux'
 import { Auth_Input } from '../../components/Input'
-import { ROUTES } from '../../Data/remote/Routes'
+import { BASE_URL, ROUTES } from '../../Data/remote/Routes'
 import apiRequest from '../../Data/remote/Webhandler'
 import { showFlash } from '../../utils/MyUtils'
 import { setUser } from '../../Data/Local/Store/Actions'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storage_keys } from '../../utils/StorageKeys'
-
+import ImagePicker from 'react-native-image-crop-picker';
 
 const ViewProfile = (props) => {
     const user = useSelector((state) => state.authReducer.user)
@@ -22,41 +22,106 @@ const ViewProfile = (props) => {
     const [username, setusername] = useState(user?.username)
     const [phone, setphone] = useState(user?.phone)
     const [email, setemail] = useState(user?.email)
+    const [user_image, setuser_image] = useState(user?.user_image)
+    const [imageObject, setimageObject] = useState({})
     const dispatch = useDispatch()
+
+    const handlePickImage = () => {
+        Alert.alert(
+            'Change Image',
+            "Select an Image from",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => { },
+                },
+                {
+                    text: "Camera",
+                    onPress: () => { openCamera() },
+                },
+                {
+                    text: "Gallery",
+                    onPress: () => { openGallery() },
+                }
+            ]
+        );
+    }
+
+    const openCamera = () => {
+        ImagePicker.openCamera({
+            width: 300,
+            height: 400,
+            cropping: true,
+        }).then(image => {
+            setimageObject(image)
+        });
+    }
+
+    const openGallery = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            setimageObject(image)
+        })
+    }
 
     const handleEdit = async () => {
         if (!isEdit) {
             setisEdit(true)
         } else {
             if (username && email && phone) {
-                const result = await apiRequest({
-                    method: "post",
-                    url: ROUTES.UPDATE_USER_PROFILE,
-                    data: {
-                        email,
-                        username,
-                        phone,
-                        user_id: user?.id,
-                        token: user?.token
-                    }
-                }).catch((error) => {
-                    showFlash("Somehomg Went Wrong", "danger", 'auto')
+                let form = new FormData()
+                form.append('email', email);
+                form.append('username', username);
+                form.append('phone', phone);
+                form.append('token', user?.token);
+                form.append('user_id', user?.id);
+
+                if (imageObject?.path) {
+                    form.append('user_image',
+                        { uri: imageObject?.path, type: imageObject?.mime, mime: imageObject?.mime, name: 'profile.png' })
+                }
+
+               const result = await fetch(BASE_URL + ROUTES.UPDATE_USER_PROFILE, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    body: form
                 })
-                if (result?.data?.status) {
-                    showFlash(result?.data?.message, 'success', 'none')
-                    dispatch(setUser({...user, email : email, username : username, phone : phone}))
-                    AsyncStorage.setItem(storage_keys.USER_DATA_KEY, 
-                        JSON.stringify({...user, email : email, username : username, phone : phone}))
-                        .then(() => {  setisEdit(false)})
-                  
+                    .then((response) => response.json())
+                    .then((json) => {
+                        return json
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+                if (result?.status) {
+                    showFlash(result?.message, 'success', 'none')
+                    dispatch(setUser(result?.data))
+                    AsyncStorage.setItem(storage_keys.USER_DATA_KEY,
+                        JSON.stringify(result?.data))
+                        .then(() => { setisEdit(false) })
+                   
+
                 } else {
-                    showFlash(result?.data?.message, 'danger', 'none')
+                    showFlash(result?.message, 'danger', 'none')
                 }
             } else {
                 showFlash("Please Enter your information!", "warning", "auto")
             }
         }
     }
+
+    let avatar = user?.user_image ?
+        user?.user_image?.includes('http') ?
+            user?.user_image :
+            BASE_URL + "uploads/" + user?.user_image
+        :
+        "https://www.w3schools.com/w3images/avatar2.png"
 
     return (
         <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
@@ -66,8 +131,12 @@ const ViewProfile = (props) => {
             <Layout fixed={false}>
                 {/* Image Container */}
                 <View style={styles.topContainer}>
-                    <TouchableOpacity activeOpacity={0.9}>
-                        <Image source={{ uri: "https://source.unsplash.com/user/c_v_r/1900x80" }}
+                    <TouchableOpacity activeOpacity={0.9} onPress={() => handlePickImage()}>
+                        <Image source={{
+                            uri: imageObject?.path ?
+                                imageObject?.path :
+                                avatar
+                        }}
                             style={styles.image} />
                         <View style={styles.editIcon}>
                             <MTCIcons name='pencil-outline' size={FS_val(14, 700)} color={COLORS.pure_White} />
