@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, Image, Platform } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, Platform , StatusBar} from 'react-native'
 import React from 'react'
 import { Heading, If, Label, Layout } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'

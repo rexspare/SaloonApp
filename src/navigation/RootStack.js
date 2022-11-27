@@ -95,7 +95,7 @@ const TabStack = () => {
       headerShown: false,
       tabBarItemStyle: {},
 
-      tabBarStyle: { height: Platform.OS === 'ios' ? 85 : 55, display : visible ? "flex" : "none" },
+      tabBarStyle: { height: Platform.OS === 'ios' ? 85 : 55,},
       tabBarShowLabel:false
     }}
   >

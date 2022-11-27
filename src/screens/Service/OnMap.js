@@ -167,14 +167,19 @@ const OnMap = (props) => {
                                 <MTIcon name='location-pin' size={45} color={COLORS.secondary} />
                             </Marker>
                             {/* SERVICES NEAR ME */}
-                            {vendorLocationArray.map((marker, index) => (
+                            {vendorLocationArray?.map((marker, index) => (
                                 <Marker
                                     key={index}
                                     coordinate={marker}
                                     title={marker?.data?.business_name || "title"}
                                     description={marker?.data?.primary_category || "desc"}
-                                    onCalloutPress={() => props.navigation.replace("Service",
-                                        { provider: { businessDetails: marker?.data } })}
+                                    onCalloutPress={() => {
+                                        try {
+                                            props.navigation.goBack()
+                                        } catch (error) {
+                                            
+                                        }
+                                    }}
 
                                 />
                             ))}

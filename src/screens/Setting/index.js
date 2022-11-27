@@ -70,10 +70,11 @@ const Setting = (props) => {
             url: ROUTES.USER_IS_NOTIFY,
             data : {user_id : user.id, is_notify : "check"}
         }).catch((error) => {
-            console.log("Error Getting Reviews ==>>", error);
+            console.log("Error Getting NOTI SETTING ==>>", error);
         })
 
         if (result?.data?.status) {
+            console.log("Getting NOTI SETTING ==>>", result?.data);
             setisOn(result?.data?.is_notify == 1 ? true : false)
         }
     }
@@ -84,7 +85,7 @@ const Setting = (props) => {
             url: ROUTES.USER_IS_NOTIFY,
             data : {user_id : user.id, is_notify : val ? 1 : 0}
         }).catch((error) => {
-            console.log("Error Getting Reviews ==>>", error);
+            console.log("EError Setting NOTI SETTING==>>", error);
         })
       
         if (result.data?.status) {

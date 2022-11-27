@@ -54,7 +54,7 @@ const ViewProfile = (props) => {
             cropping: true,
         }).then(image => {
             setimageObject(image)
-        });
+        }).catch(() => {})
     }
 
     const openGallery = () => {
@@ -64,7 +64,7 @@ const ViewProfile = (props) => {
             cropping: true
         }).then(image => {
             setimageObject(image)
-        })
+        }).catch(() => {})
     }
 
     const handleEdit = async () => {

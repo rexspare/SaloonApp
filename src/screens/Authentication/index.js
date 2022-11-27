@@ -60,13 +60,18 @@ const AuthScreen = (props) => {
   }
 
   const GoogleSignUp = async () => {
+    // const pushToken = (await OneSignal.getDeviceState()).pushToken
+
     setisLoading(true)
     try {
+      const data = await OneSignal.getDeviceState();
+      const player_id = data?.userId;
+      console.log("PLAYER ID ===>>>", player_id);
+
       let issignedIn = await GoogleSignin.isSignedIn()
       if (issignedIn) {
         await GoogleSignin.revokeAccess()
       }
-      const onesignalData = await OneSignal.getDeviceState();
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signIn().then(async (result) => {
         const response = await dispatch(
@@ -75,7 +80,7 @@ const AuthScreen = (props) => {
             username: result.user?.name,
             role: 'customer',
             googleID: result.user?.id,
-            player_id: onesignalData?.userId,
+            player_id: player_id,
             user_image_url: result?.user?.photo || ""
           },
             (result) => { })
@@ -87,6 +92,26 @@ const AuthScreen = (props) => {
             showFlash("Vendor cannot loggin in user app!", "danger", 'none')
           }
 
+        } else if (response.authenticity === false && response.status === true) {
+          const response_ = await dispatch(
+            registerUser({
+              email: result.user?.email,
+              username: result.user?.name,
+              role: 'customer',
+              googleID: result.user?.id,
+              // player_id: player_id,
+              user_image_url: result?.user?.photo || ""
+            },
+              (result) => { })
+          );
+          if (response_.authenticity === true) {
+            if (response_?.userData?.role != "vendor") {
+              callBack(response_)
+            } else {
+              showFlash("Vendor cannot loggin in user app!", "danger", 'none')
+            }
+
+          }
         }
       });
     } catch (error) {
@@ -107,7 +132,7 @@ const AuthScreen = (props) => {
     setisLoading(false)
   };
 
-  const callBack = (result) => {
+  const callBack = async (result) => {
     dispatch(setUser(result?.userData))
     AsyncStorage.setItem(storage_keys.USER_DATA_KEY, JSON.stringify(result?.userData))
     dispatch(setIsUserLoggedIn(true))

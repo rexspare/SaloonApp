@@ -111,6 +111,10 @@ const SelectTime = (props) => {
                         }
                     }).catch((err) => {
                     });
+
+                    console.log('====================================');
+                    console.log(notificationResponse.data);
+                    console.log('====================================');
                 }
             showFlash("Service Booked Successfully", "success", 'none')
             dispatch(getFavorites(user.id))

@@ -28,9 +28,9 @@ const App = () => {
     const data = await OneSignal.getDeviceState();
 
     const player_id = data?.userId;
-    // console.log("PLAYER ID ===>>>", player_id);
-    // console.log("PUSH TOKEN ===>>>", pushToken);
-    // console.log("FCM TOKEN ===>>>", fcmToken);
+    console.log("PLAYER ID ===>>>", player_id);
+    console.log("PUSH TOKEN ===>>>", pushToken);
+    console.log("FCM TOKEN ===>>>", fcmToken);
   }
 
   return (

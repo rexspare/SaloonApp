@@ -12,7 +12,7 @@ import { styles } from './styles'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Swiper from 'react-native-swiper'
-import { getGeoCodePosition, getRatingText, categoryIntoArray, showFlash, tConvert } from '../../utils/MyUtils'
+import { getGeoCodePosition, getRatingText, categoryIntoArray, showFlash, tConvert, openMaps } from '../../utils/MyUtils'
 import { setActiveService } from '../../Data/Local/Store/Actions';
 import apiRequest from '../../Data/remote/Webhandler'
 import { ROUTES } from '../../Data/remote/Routes'
@@ -56,7 +56,7 @@ const Service = (props) => {
         const result = await apiRequest({
             method: "POST",
             url: ROUTES.GET_REVIEWS,
-            data : {vendor_id : businessDetails?.id}
+            data: { vendor_id: businessDetails?.id }
         }).catch((error) => {
             console.log("Error Getting Reviews ==>>", error);
         })
@@ -118,14 +118,20 @@ const Service = (props) => {
                     <Text_Button
                         title={lang._55}
                         textStyles={styles.mapBtn}
-                        onpress={() => props.navigation.navigate("OnMap",
-                            {
-                                locationArray: [{
-                                    data: businessDetails,
-                                    latitude: parseFloat(businessDetails?.business_lat),
-                                    longitude: parseFloat(businessDetails?.business_long)
-                                }],
-                            })}
+                        onpress={() => {
+                            openMaps(parseFloat(businessDetails?.business_lat),
+                                parseFloat(businessDetails?.business_long),
+                                businessDetails?.business_name
+                            )
+                            // props.navigation.navigate("OnMap",
+                            // {
+                            //     locationArray: [{
+                            //         data: businessDetails,
+                            //         latitude: parseFloat(businessDetails?.business_lat),
+                            //         longitude: parseFloat(businessDetails?.business_long)
+                            //     }],
+                            // })
+                        }}
                     />
 
                     {/* OTHER DETAILS  */}
@@ -150,7 +156,7 @@ const Service = (props) => {
                         <Text_Button
                             title={lang._108}
                             textStyles={styles.mapBtn}
-                            onpress={() => props.navigation.navigate("Reviews", {reviews : reviewsList, vendor_id : businessDetails?.id})}
+                            onpress={() => props.navigation.navigate("Reviews", { reviews: reviewsList, vendor_id: businessDetails?.id })}
                         />
                     </View>
                 </View>
