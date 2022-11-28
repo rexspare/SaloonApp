@@ -14,6 +14,7 @@ import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Geolocation from 'react-native-geolocation-service';
 import { showFlash } from '../../utils/MyUtils';
 import OneSignal from 'react-native-onesignal';
+import messaging from '@react-native-firebase/messaging'
 
 const prefManager = new PrefManager()
 
@@ -39,6 +40,8 @@ const Splash = () => {
     OneSignal.setNotificationOpenedHandler(notification => {
       console.log("OneSignal: notification opened:", notification);
     });
+
+ 
 
   const handleLocationRequest = () => {
     check(Platform.OS === "ios" ? PERMISSIONS.IOS.LOCATION_WHEN_IN_USE : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)

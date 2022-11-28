@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, StyleSheet, Image, StatusBar, Animated, TouchableOpacity, FlatList, Platform } from 'react-native'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { AppointmentItem, Heading, If, Label, Layout } from '../../components'
 import commonStyles from '../../assets/styles/CommonStyles'
 import { COLORS, FONTS, FS_height, height, width } from '../../utils/Common'
@@ -11,12 +11,15 @@ import MTCIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { openMaps, showFlash } from '../../utils/MyUtils'
 import apiRequest from '../../Data/remote/Webhandler'
 import { ROUTES } from '../../Data/remote/Routes'
+import { useFocusEffect } from '@react-navigation/native'
 
 
 const Upcomming = (props) => {
     const swipeableRef = useRef(Swipeable)
     const { DATA } = props
     const allVendors = useSelector((state) => state.appReducer.allVendors)
+    const bookingList = useSelector((state) => state.appReducer.myBookings)
+    const [refreshState, setrefreshState] = useState(0)
 
     const handlePress = (detail) => {
         if (detail?.business_lat) {
@@ -66,6 +69,19 @@ const Upcomming = (props) => {
 
     }
 
+    const sortedList = () =>{
+        return bookingList.sort(function (a, b) {
+            return (a.booking_status > b.booking_status
+              ? 1 : (a.booking_status === b.booking_status ? 0 : -1))
+          })
+    }
+
+    useFocusEffect(() =>{
+        setTimeout(() =>{
+            setrefreshState(refreshState + 1)
+        }, 1500)
+    })
+
     const swipeRight = (item) => {
         return (
             <Animated.View style={[commonStyles._center, styles.swipeBTN]}>
@@ -91,7 +107,7 @@ const Upcomming = (props) => {
 
             <Layout fixed={false}>
                 {
-                    DATA.map((item, index) => (
+                    sortedList().map((item, index) => (
                         <GestureHandlerRootView key={index}>
                             <Swipeable
                                 ref={swipeableRef}

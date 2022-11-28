@@ -101,13 +101,17 @@ const getRatingText = (rating) => {
 
 const categoryIntoArray = (primary, secondary) => {
 
-    var array = primary.replace(/", "/g, "")
-    var varry = secondary.replace(/", "/g, "")
-    array = primary.split(",")
-    varry = secondary.split(",")
+    var array = primary?.replace(/", "/g, "")
+    var varry = secondary?.replace(/", "/g, "")
+    array = primary?.split(",")
+    varry = secondary?.split(",")
 
    const finalArray = [...array, ...varry]
-   return finalArray
+   if((finalArray.constructor === Array)){
+    return finalArray
+   } else {
+   return []
+   }
 }
 
 function tConvert (time) {
