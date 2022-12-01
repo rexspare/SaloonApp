@@ -11,7 +11,7 @@ import { Auth_Input } from '../../components/Input'
 import { BASE_URL, ROUTES } from '../../Data/remote/Routes'
 import apiRequest from '../../Data/remote/Webhandler'
 import { showFlash } from '../../utils/MyUtils'
-import { setUser } from '../../Data/Local/Store/Actions'
+import { setUser, setIsUserLoggedIn } from '../../Data/Local/Store/Actions'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { storage_keys } from '../../utils/StorageKeys'
 import ImagePicker from 'react-native-image-crop-picker';
@@ -116,6 +116,33 @@ const ViewProfile = (props) => {
         }
     }
 
+    const handleDelete = async () => {
+        const result = await apiRequest({
+            method: "POST",
+            url: ROUTES.DELETE_USER_ACCOUNT,
+            data :{
+                user_id : user?.id,
+                email : user?.email
+            }
+          }).catch((err) => {
+            showFlash("Network Error", "danger", 'auto',)
+            return false;
+          });
+          console.log(result.data);
+          if (result.data.status) {
+            AsyncStorage.removeItem(storage_keys.USER_DATA_KEY)
+            .then(() => {
+                dispatch(setIsUserLoggedIn(false))
+                dispatch(setUser({}))
+                props.navigation.goBack()
+            })
+            showFlash("User and their data deleted successfully", "danger", 'auto',)
+          }
+          else {
+            showFlash("Error deleting user, please try again", "danger", 'auto',)
+          }
+    }
+
     let avatar = user?.user_image ?
         user?.user_image?.includes('http') ?
             user?.user_image :
@@ -214,6 +241,22 @@ const ViewProfile = (props) => {
 
                     <Text_Button style={styles.deleteBtn} textStyles={styles.deleteTxt}
                         title={lang._54}
+                        onpress={() => {
+                            Alert.alert(
+                                "Dangerous action",
+                                "This actions is irreversible",
+                                [
+                                    {
+                                      text: "Cancel",
+                                      onPress: () => { },
+                                    },
+                                    {
+                                      text: "Delete",
+                                      onPress: () => { handleDelete() },
+                                    },
+                                  ]
+                            )
+                        }}
                     />
 
                 </View>

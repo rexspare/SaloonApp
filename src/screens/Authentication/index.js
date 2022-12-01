@@ -99,7 +99,7 @@ const AuthScreen = (props) => {
               username: result.user?.name,
               role: 'customer',
               googleID: result.user?.id,
-              // player_id: player_id,
+              player_id: player_id,
               user_image_url: result?.user?.photo || ""
             },
               (result) => { })

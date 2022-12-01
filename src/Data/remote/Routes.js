@@ -23,7 +23,9 @@ GET_REVIEWS:"get-reviews",
 UPDATE_USER_PROFILE :"update-user-profile",
 SEND_USER_NOTIFICATION : "send-user-notification",
 SEND_PROVIDER_NOTIFICATION:'send-provider-notification',
-USER_IS_NOTIFY : 'user-is-notify'
+USER_IS_NOTIFY : 'user-is-notify',
+DELETE_USER_ACCOUNT: "delete-user-account",
+GET_GALLERY_IMAGE: 'get-gallery-images',
 }
 
 export {

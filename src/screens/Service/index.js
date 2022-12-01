@@ -15,7 +15,7 @@ import Swiper from 'react-native-swiper'
 import { getGeoCodePosition, getRatingText, categoryIntoArray, showFlash, tConvert, openMaps } from '../../utils/MyUtils'
 import { setActiveService } from '../../Data/Local/Store/Actions';
 import apiRequest from '../../Data/remote/Webhandler'
-import { ROUTES } from '../../Data/remote/Routes'
+import { BASE_URL, ROUTES } from '../../Data/remote/Routes'
 
 const Service = (props) => {
     const { businessDetails } = props.route?.params?.provider
@@ -26,13 +26,11 @@ const Service = (props) => {
     const [opacity, setopacity] = useState(0)
     const [servicesArray, setservicesArray] = useState([])
     const [reviewsList, setreviewsList] = useState([])
+    const [gallery, setgallery] = useState([])
 
 
     const CoverImages = [
         { _id: 1, name: "Beauty Salon", image: "https://source.unsplash.com/user/c_v_r/1900x800" },
-        { _id: 2, name: "Hair Salon", image: "https://source.unsplash.com/user/c_v_r/1900x800" },
-        { _id: 3, name: "Babarshop", image: "https://source.unsplash.com/user/c_v_r/1900x800" },
-        { _id: 4, name: "Babarshop", image: "https://source.unsplash.com/user/c_v_r/1900x800" },
     ]
 
 
@@ -65,6 +63,24 @@ const Service = (props) => {
         }
     }
 
+    // GET GALLERY 
+
+    useEffect(() => {
+        getgallery()
+    }, [businessDetails?.id])
+
+    const getgallery = async () => {
+        const result = await apiRequest({
+            method: "POST",
+            url: ROUTES.GET_GALLERY_IMAGE,
+            data: { user_id: businessDetails?.id }
+        }).catch((err) => {
+            showFlash("Network Error", "danger", 'auto',)
+        })
+        if (result?.data?.status == true) {
+            setgallery(result?.data?.data)
+        }
+    }
 
     return (
         <SafeAreaView style={[commonStyles.container, { backgroundColor: COLORS.primary }]}>
@@ -82,19 +98,28 @@ const Service = (props) => {
                 {/* CONTENT */}
                 {/* COVER IMAGES SWIPER */}
                 <View style={styles.coverContainer}>
-                    <Swiper
-                        paginationStyle={{ marginBottom: - FS_height(2) }}
-                        dot={<Octicons name="dot-fill" size={FS_height(2.2)} color={"#b8b6b6"} style={{ marginHorizontal: '1%' }} />}
-                        activeDot={<Octicons name="dot-fill" size={FS_height(2.2)} color={COLORS.primary} style={{ marginHorizontal: '1%' }} />}
-                    >
-                        {
-                            CoverImages.map((item) => (
-                                <Image key={item._id}
-                                    source={{ uri: item.image }}
-                                    style={{ width: '100%', height: '100%' }} />
-                            ))
-                        }
-                    </Swiper>
+                    {
+                        gallery?.length > 0 ?
+                            <Swiper
+                                paginationStyle={{ marginBottom: - FS_height(2) }}
+                                dot={<Octicons name="dot-fill" size={FS_height(2.2)} color={"#b8b6b6"} style={{ marginHorizontal: '1%' }} />}
+                                activeDot={<Octicons name="dot-fill" size={FS_height(2.2)} color={COLORS.primary} style={{ marginHorizontal: '1%' }} />}
+                            >
+                                {
+                                    gallery.map((item, index) => (
+                                        <Image key={index}
+                                            source={{ uri: BASE_URL + "uploads/" + item.image }}
+                                            style={{ width: '100%', height: '100%' }} />
+                                    ))
+                                }
+                            </Swiper>
+                            :
+                            <Image
+                                source={require('../../assets/images/business.png')}
+                                style={{ width: '100%', height: '100%' }}
+                                resizeMode="contain"
+                            />
+                    }
                 </View>
 
                 <View style={{ paddingHorizontal: "4%", alignItems: 'flex-start' }}>

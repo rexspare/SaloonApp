@@ -4,6 +4,7 @@ import { COLORS, FONTS, FS_height, FS_val, width,  } from '../utils/Common'
 import { getGeoCodePosition, getRatingText } from '../utils/MyUtils'
 import Label from './Label'
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { BASE_URL } from '../Data/remote/Routes'
 
 const ProviderCard = (props) => {
   const address = "Bukhari Lane 12, Karachi (Defense Housing Association)"
@@ -16,8 +17,10 @@ const ProviderCard = (props) => {
   return (
     <TouchableOpacity activeOpacity={1} style={[styles.container, props.style]}
     onPress={() => props.onpress()}>
-      <Image source={{ uri: "https://source.unsplash.com/user/c_v_r/1900x800" }}
-        style={styles.image} />
+      <Image source={item?.user_image ? {uri : BASE_URL + "uploads/" +  item?.user_image } : require('../assets/images/business.png')}
+        style={styles.image}
+        resizeMode="contain"
+        />
       <View>
         <Label style={styles.name}>{item?.business_name}</Label>
         <Label style={styles.address}>
